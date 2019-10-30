@@ -30,7 +30,7 @@ func (i Irishrail) GetStops() (map[string]tfi.Stop, error) {
 
 		// Default from current total count of 267 stops
 		stopMap = make(map[string]tfi.Stop, 280)
-		uri     = fmt.Sprintf("%s/getAllStationsXML", IRBaseUrl)
+		uri     = fmt.Sprintf("%s/getAllStationsXML", irBaseURL)
 	)
 
 	parseFloat := func(s string) float32 {
@@ -68,7 +68,7 @@ func (i Irishrail) GetRoute(id string) (tfi.Route, error) {
 		resp  arrayOfObjStation
 		route tfi.Route
 		uri   = fmt.Sprintf("%s/getAllStationsXML_WithStationType?StationType=%s",
-			IRBaseUrl, routeMapping[id])
+			irBaseURL, routeMapping[id])
 	)
 
 	err := i.makeRequest(uri, resp)
@@ -89,7 +89,7 @@ func (i Irishrail) GetRoutes() (map[string]tfi.Route, error) {
 	getRoute := func(t string) (tfi.Route, error) {
 		var respObj arrayOfObjStation
 		err := i.makeRequest(
-			fmt.Sprintf("%s/getAllStationsXML_WithStationType?StationType=%s", IRBaseUrl, t),
+			fmt.Sprintf("%s/getAllStationsXML_WithStationType?StationType=%s", irBaseURL, t),
 			respObj)
 		if err != nil {
 			return tfi.Route{}, err
@@ -125,7 +125,7 @@ func (i Irishrail) GetStopRTPI(id string) (tfi.RTResult, error) {
 	var (
 		resp    arrayOfObjStationData
 		results = []tfi.RTResultRow{}
-		uri     = fmt.Sprintf("%s/getStationDataByCodeXML?StationCode=%s", IRBaseUrl, id)
+		uri     = fmt.Sprintf("%s/getStationDataByCodeXML?StationCode=%s", irBaseURL, id)
 	)
 
 	parseInt := func(s string) int {
